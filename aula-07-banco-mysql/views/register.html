@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Acessando a flash message -->
+ {% with messages = get_flashed_messages(with_categories=true) %}
+ <!-- Messages é um array que possui category e message-->
+    {% for category, message in messages %}
+<div class="alert alert-{{ category }}">
+    {{ message }}
+</div>
+{% endfor %}
+{% endwith %}
+
+
+<div class="container">
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2>Cadastro de Usuário</h2>
+        </div>
+        <div class="card-body">
+            <form action="{{url_for('register')}}">
+                <label for="">Email:</label>
+                <input type="email" name="email" placeholder="email@example.com" class="form-control">
+                <label for="">Senha:</label>
+                <input type="password" name="password" class="form-control" placeholder="Crie uma senha">
+                <button type="submit" class="btn btn-success btn-block mt-3">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

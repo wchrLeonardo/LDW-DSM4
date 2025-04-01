@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<div class="col-md-6 m-auto">
+    <h3 style="text-align: center;">Editar jogo: </h3>
+    <form action="{{url_for('edit', id=game.id)}}" method="POST">
+        <input type="text" name="titulo" placeholder="Título" class="form-control" value="{{game.titulo}}" required>
+            <input type="number" name="ano" placeholder="Ano" class="form-control" value="{{game.ano}}" required>
+            <input type="text" name="categoria" placeholder="Categoria" class="form-control" value="{{game.categoria}}" required>
+            <input type="text" name="plataforma" placeholder="Plataforma" class="form-control" value="{{game.plataforma}}" required>
+            <input type="number" name="preco" placeholder="Preço" class="form-control" value="{{game.preco}}" required>
+            <input type="number" name="quantidade" placeholder="Quantidade" class="form-control" value="{{game.quantidade}}" required>
+            <input type="submit" value="Alterar" class="btn btn-warning" onclick="return confirm('Confirma as alterações ?')">
+            <a href="{{url_for('estoque')}}"><input type="button" value="Cancelar" class="btn btn-danger"></a>
+    </form>
+</div>
+
+{%endblock content%}

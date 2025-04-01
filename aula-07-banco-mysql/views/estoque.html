@@ -1,0 +1,62 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<details>
+    <summary>[Cadastrar novo jogo]</summary>
+    <div class="col-md-4">
+        <form action="{{url_for('estoque')}}" method="POST">
+            <input type="text" name="titulo" placeholder="Título" class="form-control" required>
+            <input type="number" name="ano" placeholder="Ano" class="form-control" required>
+            <input type="text" name="categoria" placeholder="Categoria" class="form-control" required>
+            <input type="text" name="plataforma" placeholder="Plataforma" class="form-control" required>
+            <input type="number" name="preco" placeholder="Preço" class="form-control" required>
+            <input type="number" name="quantidade" placeholder="Quantidade" class="form-control" required>
+            <br>
+            <input type="submit" value="Cadastrar" class="btn btn-success">
+            <input type="reset" value="Limpar" class="btn btn-danger">
+        </form>
+    </div>
+</details>
+<hr>
+<h5>Jogos em Estoque: </h5>
+<hr>
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+        <th>Títul: o</th>
+        <th>Ano: </th>
+        <th>Categoria: </th>
+        <th>Plataforma: </th>
+        <th>Preço: </th>
+        <th>Quantidade: </th>
+        <th style="text-align: center;" colspan="2">Açoes: </th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for game in gamesestoque%}
+        <tr>
+        <td>{{game.titulo}}</td>
+        <td>{{game.ano}}</td>
+        <td>{{game.categoria}}</td>
+        <td>{{game.plataforma}}</td>
+        <td>{{game.preco}}</td>
+        <td>{{game.quantidade}}</td>
+        <td><a style="color: orange; text-decoration: none;" href="{{url_for('edit', id=game.id)}}">Editar</a></td>
+        <td><a style="color: red; text-decoration: none;" href="{{url_for('estoque', id=game.id)}}" onclick="return confirm('Deseja mesmo excluir {{game.titulo}} ?')">Excluir</a></td>
+        </tr>
+        {%endfor%} 
+    </tbody>
+</table>
+
+<p style="text-align: center;">
+    <!-- Se houver registro anteriores -->
+     {%if gamesestoque.has_prev%}
+     <a href="{{url_for('estoque', page=gamesestoque.prev_num)}}"><< Anterior</a>
+     {% endif %}
+
+     {%if gamesestoque.has_next%}
+     <a href="{{url_for('estoque', page=gamesestoque.next_num)}}">Próximo >></a>
+     {%endif%}
+</p>
+
+{%endblock content%}
